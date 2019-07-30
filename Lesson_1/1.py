@@ -10,7 +10,7 @@ def find_numbers(value):
     :return (numbers,): tuple of numbers
     """
     int_value = int(value)
-    first = int_value // 100 % 100
+    first = int_value // 100 % 10
     second = int_value // 10 % 10
     third = int_value % 10
 
