@@ -8,7 +8,7 @@ def search_max_negative(arr):
     max_negative_value = max_negative_idx = None
 
     for (idx, el) in enumerate(arr):
-        if el > 0:
+        if el >= 0:
             continue
 
         if max_negative_value is None or max_negative_value < el:
