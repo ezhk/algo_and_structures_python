@@ -5,6 +5,7 @@
 """
 
 import timeit
+import cProfile
 
 
 def merge_sort(arr):
@@ -87,10 +88,6 @@ def search_max_only(arr):
 if __name__ == "__main__":
     init_array = [54, 2, -20, 33, 679, 2, 212, 345, 20, 74, -69, 0]
 
-    print(search_most_frequently_el(init_array))
-    print(search_most_frequently_el_sorted(init_array))
-    print(search_max_only(init_array))
-
     print("Оценка алгоритмов сортировки: ")
     print("\tНеоптимальная собственная реалзация алгоритма сортировки слиянием: ", end='')
     print(timeit.timeit("search_most_frequently_el(init_array)",
@@ -113,3 +110,33 @@ if __name__ == "__main__":
 
     print("Наиболее быстрым оказался вариант c search_most_frequently_el_sorted,\n"
           "где используется встроенный алгоритм сортировки, но собственный подсчёт частотности.")
+
+    print("\nПрофилирование search_most_frequently_el_sorted: ")
+    cProfile.run('search_most_frequently_el_sorted(init_array * 10000000)')
+
+
+"""
+Оценка алгоритмов сортировки: 
+        Неоптимальная собственная реалзация алгоритма сортировки слиянием: 2.940988425
+        использование встроенной функции sort: 0.23921578299999968
+                Несмотря на примерно схожую сложность функций сортировки (N * logN)
+                в моей реализации очень медленные операции расширения массива и взятия
+                первого элемента через pop. Также в python используется timsort.
+        использование встроенной функции max вместо search_most_frequently_el: 0.3435944130000004
+Наиболее быстрым оказался вариант c search_most_frequently_el_sorted,
+где используется встроенный алгоритм сортировки, но собственный подсчёт частотности.
+
+Профилирование search_most_frequently_el_sorted: 
+         7 function calls in 1.910 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 1.py:59(search_most_frequently_el_sorted)
+        1    1.910    1.910    1.910    1.910 <string>:1(<module>)
+        1    0.000    0.000    1.910    1.910 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+        1    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+"""
