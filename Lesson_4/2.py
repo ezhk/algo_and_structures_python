@@ -58,7 +58,6 @@ def search_eratosthenes_performance(n):
     init_arr[0], init_arr[1] = 0, 0
 
     shift = 0
-    # 99  2,10  2,10 100//3
     while len(primes) < n:
         for i in range(2, int(math.sqrt(max_value) + 1)):
             start_shift = max(2, shift // i)
