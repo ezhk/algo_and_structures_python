@@ -23,7 +23,7 @@ def bubble_sort(arr):
 
         for idx in range(1, len_arr - shift):
             cycle_counter += 1
-            if arr[idx] < arr[idx - 1]:
+            if arr[idx] > arr[idx - 1]:
                 arr[idx], arr[idx - 1] = arr[idx - 1], arr[idx]
                 is_shifted = True
 
